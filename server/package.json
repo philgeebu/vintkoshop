@@ -1,0 +1,25 @@
+{
+	"name": "vintkoshopserver",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/philgeebu/vintkoshop\u001b[3~\u001b[3~\u001b[3~.git"
+	},
+	"author": "Phil Gee",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/philgeebu/vintkoshop\u001b[3~\u001b[3~\u001b[3~/issues"
+	},
+	"homepage": "https://github.com/philgeebu/vintkoshop\u001b[3~\u001b[3~\u001b[3~#readme",
+	"dependencies": {
+		"body-parser": "^1.19.1",
+		"express": "^4.17.2",
+		"express-handlebars": "^6.0.2"
+	}
+}
