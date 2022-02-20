@@ -100,3 +100,10 @@ pwd:"",
 roles:["readWrite"]	
 }
 )
+
+
+TODO:
+Error handling
+Commenting
+Config Instructions
+    user/pass config?

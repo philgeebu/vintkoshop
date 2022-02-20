@@ -106,3 +106,4 @@ dist
 # Keep watchuploads directory, but not content
 server/public/watchuploads/*
 !server/public/watchuploads/.gitkeep
+!server/public/watchuploads/genericwatch.png
