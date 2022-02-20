@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-watchuploads/*
-!watchuploads/.gitkeep
+# Keep watchuploads directory, but not content
+server/public/watchuploads/*
+!server/public/watchuploads/.gitkeep
