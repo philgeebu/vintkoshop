@@ -1,28 +1,28 @@
 import express from 'express'
-import bodyparser from 'body-parser'
 import routes from './routes/index.js'
 import {
     engine
 } from 'express-handlebars';
 
-const APP = express()
+const app = express()
 
-APP.engine('handlebars', engine())
-APP.set('view engine', 'handlebars')
+// View Engine (Handlebars)
+app.engine('handlebars', engine())
+app.set('view engine', 'handlebars')
 
-APP.use(express.static('/public'))
+// Static Directory(s)
+app.use(express.static('public'))
 
-APP.use(bodyparser.json())
-APP.use(bodyparser.urlencoded({
-    extended: false
-}))
+// Body-Parser
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
-APP.use('/', routes)
-APP.use(function (req, res) {
-    res.status(404)
-    res.render('404')
+// Routing
+app.use('/', routes)
+app.use(function (req, res) {
+    res.status(404).render('404')
 })
 
-APP.listen(3000, function () {
+app.listen(3000, function () {
     console.log('http://localhost:3000');
 })
