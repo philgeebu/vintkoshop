@@ -25,13 +25,15 @@ router.get('/watches/edit/:id', watches.watchEdit)
 router.post('/watches/edit', upload.single('picturePath'), watches.watchUpdate)
 router.get('/watches/delete/:id', watches.watchDelete)
 
+// Users
+import * as users from './users.js'
+router.get('/users', users.userList)
+router.get('/users/add', users.userAdd)
+
 // Messages
 import messageList from './messageList.js'
 router.get('/messages', messageList)
 
-// Users
-import userList from './userList.js'
-router.get('/users', userList)
 
 // Login Form
 import loginForm from './loginForm.js'

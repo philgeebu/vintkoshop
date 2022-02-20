@@ -1,1 +1,27 @@
-<h1>{{title}}</h1>
+{{#if data}}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Admin?</th>
+            <th>Last Modified</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td><strong>{{this.email}}</strong></td>
+            <td>{{this.admin}}</td>
+            <td>{{this.updatedAt}}</td>
+            <td>
+                <a class="btn btn-dark" href="/users/edit/{{this.id}}"><i class="fa-solid fa-square-pen"></i> Edit</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>There are currently no users!</p>
+{{/if}}
+<a class="btn btn-dark" href="/users/add"><i class="fa-solid fa-plus"></i> Add</a>
