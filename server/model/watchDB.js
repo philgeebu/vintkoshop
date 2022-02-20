@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import dbUrl from './dbUrl.js'
 
-let Schema = mongoose.Schema;
+let Schema = mongoose.Schema
 
 let watchSchema = new Schema({
 	brand: String,
