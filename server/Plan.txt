@@ -14,7 +14,6 @@ WATCHES
 - description
 - price
 - picturePath
-- hidden
 - created
 
 MESSAGES

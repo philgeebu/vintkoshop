@@ -10,8 +10,7 @@ let watchSchema = new Schema({
 	color: String,
 	description: String,
 	price: Number,
-	picturePath: String,
-	hidden: Boolean
+	picturePath: String
 }, {
 	collection: 'watches',
 	timestamps: true,

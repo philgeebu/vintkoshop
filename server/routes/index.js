@@ -1,17 +1,29 @@
 import express from 'express'
 import multer from 'multer'
-const upload = multer({ dest: './public/uploads/' })
+import path from 'path'
+
+const storage = multer.diskStorage({
+    destination: './public/watchuploads/',
+    filename: function (req, file, cb) {
+        cb(null, file.originalname.substring(0,10) + '-' + Date.now() +
+            path.extname(file.originalname))
+    }
+})
+
+const upload = multer({
+    storage: storage
+})
 const router = express.Router()
 
 // Watches
-import * as watch from './watches.js'
+import * as watches from './watches.js'
 router.get('/', function (req, res) {res.redirect('/watches')})
-router.get('/watches', watch.watchList)
-router.get('/watches/add', watch.watchAdd)
-router.post('/watches/add', upload.single('picturePath'), watch.watchSave)
-router.get('/watches/edit/:id', watch.watchEdit)
-router.post('/watches/edit', upload.single('picturePath'), watch.watchUpdate)
-router.get('/watches/delete/:id', watch.watchDelete)
+router.get('/watches', watches.watchList)
+router.get('/watches/add', watches.watchAdd)
+router.post('/watches/add', upload.single('picturePath'), watches.watchSave)
+router.get('/watches/edit/:id', watches.watchEdit)
+router.post('/watches/edit', upload.single('picturePath'), watches.watchUpdate)
+router.get('/watches/delete/:id', watches.watchDelete)
 
 // Messages
 import messageList from './messageList.js'
