@@ -1,8 +1,7 @@
 USERS
 - id
-- username
-- password
 - email
+- password
 - admin?
 
 WATCHES
@@ -37,7 +36,7 @@ Navbar:
 "individual read-only watch page with photo and description"
 
 /login
-"a form to submit username and password"
+"a form to submit email and password"
 
 
 
