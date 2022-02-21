@@ -31,7 +31,7 @@ export const userEdit = (req, res) => {
 }
 
 // List users view
-export const userList = async (req, res, next) => {
+export const userList = async (req, res) => {
     const users = await User.find({})
 
     const results = users.map(user => {

@@ -1,5 +1,6 @@
 import express from 'express'
 import routes from './routes/index.js'
+import session from 'express-session'
 import {
     engine
 } from 'express-handlebars';
@@ -16,6 +17,13 @@ app.use(express.static('public'))
 // Body-Parser
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
+// Initialize Express Session
+app.use(session({
+    secret: 'secretkey',
+    resave: false,
+    saveUninitialized: false,
+}))
 
 // Routing
 app.use('/', routes)
