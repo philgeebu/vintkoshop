@@ -14,8 +14,10 @@ export const watchEdit = (req, res) => {
     const id = req.params.id
 
     Watch.findById(id, (err, watch) => {
-        if (err) console.log(err)
-        if (!watch) return res.render('404')
+        if (err) return res.render('error', {
+            title: 'Error',
+            msg: err
+        })
         res.render('watch/watchEditView', {
             title: "Edit Watch",
             data: {
@@ -27,7 +29,7 @@ export const watchEdit = (req, res) => {
                 description: watch.description,
                 price: watch.price,
                 picturePath: watch.picturePath,
-                createdAt: watch.createdAt
+                updatedAt: watch.updatedAt,
             }
         })
     })
@@ -47,7 +49,6 @@ export const watchList = async (req, res) => {
             description: watch.description,
             price: watch.price,
             picturePath: watch.picturePath,
-            createdAt: watch.createdAt,
             updatedAt: watch.updatedAt,
         }
     })
@@ -70,8 +71,10 @@ export const watchSave = (req, res) => {
         picturePath: req.file ? req.file.filename : '',
     })
     watch.save((err, watch) => {
-        if (err) console.log(err)
-        if (!watch) return res.render('404')
+        if (err) return res.render('error', {
+            title: 'Error',
+            msg: err
+        })
         res.redirect('/watches/edit/' + watch._id)
     })
 }
@@ -81,8 +84,10 @@ export const watchUpdate = (req, res) => {
     const id = req.body.id
 
     Watch.findById(id, (err, watch) => {
-        if (err) console.log(err)
-        if (!watch) return res.render('404')
+        if (err) return res.render('error', {
+            title: 'Error',
+            msg: err
+        })
         let picToDelete = req.file || req.body.pictureRemove ? './public/watchuploads/' + watch.picturePath : ''
         watch.brand = req.body.brand
         watch.model = req.body.model
@@ -92,8 +97,10 @@ export const watchUpdate = (req, res) => {
         watch.price = req.body.price
         watch.picturePath = req.body.pictureRemove ? '' : req.file ? req.file.filename : watch.picturePath
         watch.save((err) => {
-            if (err) console.log(err)
-            if (!watch) return res.render('404')
+            if (err) return res.render('error', {
+                title: 'Error',
+                msg: err
+            })
             fs.unlink(picToDelete, () => {
                 res.redirect('back')
             })
@@ -106,12 +113,16 @@ export const watchDelete = (req, res) => {
     const id = req.params.id
 
     Watch.findById(id, (err, watch) => {
-        if (err) console.log(err)
-        if (!watch) return res.render('404')
+        if (err) return res.render('error', {
+            title: 'Error',
+            msg: err
+        })
         let picToDelete = './public/watchuploads/' + watch.picturePath
         watch.remove((err) => {
-            if (err) console.log(err)
-            if (!watch) return res.render('404')
+            if (err) return res.render('error', {
+                title: 'Error',
+                msg: err
+            })
             fs.unlink(picToDelete, () => {
                 res.redirect('/')
             })

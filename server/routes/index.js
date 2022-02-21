@@ -29,14 +29,17 @@ router.get('/watches/delete/:id', watches.watchDelete)
 import * as users from './users.js'
 router.get('/users', users.userList)
 router.get('/users/add', users.userAdd)
-
-// Messages
-import messageList from './messageList.js'
-router.get('/messages', messageList)
-
+router.post('/users/add', users.userSave)
+router.get('/users/edit/:id', users.userEdit)
+router.post('/users/edit', users.userUpdate)
+router.get('/users/delete/:id', users.userDelete)
 
 // Login Form
 import loginForm from './loginForm.js'
 router.get('/login', loginForm)
+
+// Messages
+import messageList from './messageList.js'
+router.get('/messages', messageList)
 
 export default router
