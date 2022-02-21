@@ -18,8 +18,18 @@ export const signIn = (req, res) => {
             title: 'Sign In',
             msg: err || 'User/password incorrect.'
         })
-        req.session.userid = user._id
-        req.session.useradmin = user.admin
+        req.session.authenticated = true
+        req.session.user = {
+            id: user._id,
+            admin: user.admin
+        }
+        res.redirect('/')
+    })
+}
+
+// Sign Out
+export const signOut = (req, res) => {
+    req.session.destroy(() => {
         res.redirect('/')
     })
 }

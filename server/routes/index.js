@@ -38,6 +38,7 @@ router.get('/users/delete/:id', users.userDelete)
 import * as signIn from './signIn.js'
 router.get('/signin', signIn.signInForm)
 router.post('/signin', signIn.signIn)
+router.get('/signout', signIn.signOut)
 
 // Message routes
 import * as messages from './messages.js'
