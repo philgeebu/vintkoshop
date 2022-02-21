@@ -27,7 +27,7 @@ MESSAGES
 Navbar:
 -Brand (Home)
 -Home
--Login
+-Sign In
 
 /
 "a list of watches with links to individual watch pages"
@@ -35,7 +35,7 @@ Navbar:
 /WATCHES.id
 "individual read-only watch page with photo and description"
 
-/login
+/signin
 "a form to submit email and password"
 
 

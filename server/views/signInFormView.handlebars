@@ -1,4 +1,7 @@
-<form method="post" action="/login">
+{{#if msg}}
+<p class="message">{{msg}}</p>
+{{/if}}
+<form method="post" action="/signin">
     <div class="form-group">
         <label for="email">Email</label><br>
         <input type="email" name="email" class="form-control" required><br>
@@ -8,6 +11,5 @@
         <input type="password" name="password" class="form-control" required><br>
     </div>
     <br>
-    <input type="submit" value="Save" class="btn btn-lg btn-success">
-    <a href="/" class="btn btn-lg btn-secondary">Cancel</a>
+    <input type="submit" value="Sign in" class="btn btn-success">
 </form>

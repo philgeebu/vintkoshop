@@ -34,14 +34,13 @@ router.get('/users/edit/:id', users.userEdit)
 router.post('/users/edit', users.userUpdate)
 router.get('/users/delete/:id', users.userDelete)
 
-// Login routes
-import * as login from './login.js'
-router.get('/login', login.loginForm)
-router.post('/login', login.loginVerify)
+//Sign in routes
+import * as signIn from './signIn.js'
+router.get('/signin', signIn.signInForm)
+router.post('/signin', signIn.signIn)
 
 // Message routes
 import * as messages from './messages.js'
 router.get('/messages', messages.messageList)
-
 
 export default router
