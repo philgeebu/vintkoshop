@@ -40,8 +40,8 @@ router.get('/login', login.loginForm)
 router.post('/login', login.loginVerify)
 
 // Message routes
-import messageList from './messageList.js'
-router.get('/messages', messageList)
+import * as messages from './messages.js'
+router.get('/messages', messages.messageList)
 
 
 export default router
