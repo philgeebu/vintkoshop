@@ -3,7 +3,7 @@
     <thead>
         <tr>
             <th>Email</th>
-            <th>Admin?</th>
+            <th style="text-align: center;">Admin?</th>
             <th>Last Modified</th>
             <th></th>
         </tr>
@@ -12,8 +12,14 @@
         {{#each data}}
         <tr>
             <td><strong>{{this.email}}</strong></td>
-            <td>{{this.admin}}</td>
-            <td>{{this.updatedAt}}</td>
+            <td style="text-align: center;">
+                {{#if this.admin}}
+                <i class="fa-solid fa-circle-check" style="color: green;"></i>
+                {{else}}
+                <i class="fa-solid fa-circle-xmark" style="color: red;"></i>
+                {{/if}}
+            </td>
+            <td><i>{{this.updatedAt}}</i></td>
             <td>
                 <a class="btn btn-dark" href="/users/edit/{{this.id}}"><i class="fa-solid fa-square-pen"></i> Edit</a>
             </td>

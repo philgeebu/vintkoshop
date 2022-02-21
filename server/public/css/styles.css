@@ -13,6 +13,11 @@ label {
     font-size: 1.1rem;
 }
 
+.message {
+    color: darkred;
+    font-weight: bolder;
+}
+
 .navbar-brand-image {
     max-height: 35px;
 }

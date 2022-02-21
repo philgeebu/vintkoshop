@@ -17,20 +17,24 @@
         <tr>
             <td>
                 {{#if this.picturePath}}
-                <img src="/watchuploads/{{this.picturePath}}" class="watch-photo-list-preview" alt="picture of a {{this.color}} {{this.year}} {{this.brand}} {{this.model}} watch">
+                <img src="/watchuploads/{{this.picturePath}}" class="watch-photo-list-preview"
+                    alt="picture of a {{this.color}} {{this.year}} {{this.brand}} {{this.model}} watch">
                 {{else}}
-                <img src="/watchuploads/genericwatch.png" name="currentPicture" class="watch-photo-list-preview" alt="generic placeholder picture of a watch">
+                <img src="/watchuploads/genericwatch.png" name="currentPicture" class="watch-photo-list-preview"
+                    alt="generic placeholder picture of a watch">
                 {{/if}}
             </td>
             <td><strong>{{this.brand}}</strong></td>
             <td>{{this.model}}</td>
             <td>{{this.year}}</td>
             <td>
-                <strong style="color:{{this.color}}; text-shadow: 0 0 2px black;">{{this.color}}</strong>
+                <strong
+                    style="color:{{this.color}}; text-shadow: 0 0 2px black;text-transform:uppercase;">{{this.color}}</strong>
             </td>
             <td style="text-align: right;">${{this.price}}</td>
-            <td>{{this.updatedAt}}</td>
-            <td><a class="btn btn-dark" href="/watches/edit/{{this.id}}"><i class="fa-solid fa-square-pen"></i> Edit</a></td>
+            <td><i>{{this.updatedAt}}</i></td>
+            <td><a class="btn btn-dark" href="/watches/edit/{{this.id}}"><i class="fa-solid fa-square-pen"></i> Edit</a>
+            </td>
         </tr>
         {{/each}}
     </tbody>
