@@ -31,21 +31,25 @@ export const userEdit = (req, res) => {
 }
 
 // List users view
-export const userList = async (req, res) => {
-    const users = await User.find({})
-
-    const results = users.map(user => {
-        return {
-            id: user._id,
-            email: user.email,
-            password: user.password,
-            admin: user.admin,
-            updatedAt: user.updatedAt
-        }
-    })
-    res.render('user/userListView', {
-        title: "User List",
-        data: results
+export const userList = (req, res) => {
+    User.find({}, (err, users) => {
+        if (err || !users) return res.render('error', {
+            title: 'Error',
+            msg: err || 'No users found.'
+        })
+        const results = users.map(user => {
+            return {
+                id: user._id,
+                email: user.email,
+                password: user.password,
+                admin: user.admin,
+                updatedAt: user.updatedAt
+            }
+        })
+        res.render('user/userListView', {
+            title: "User List",
+            data: results
+        })
     })
 }
 

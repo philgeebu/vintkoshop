@@ -36,26 +36,29 @@ export const watchEdit = (req, res) => {
 }
 
 // List watches view
-export const watchList = async (req, res) => {
-    const watches = await Watch.find({})
-
-    const results = watches.map(watch => {
-        return {
-            id: watch._id,
-            brand: watch.brand,
-            model: watch.model,
-            year: watch.year,
-            color: watch.color,
-            description: watch.description,
-            price: watch.price,
-            picturePath: watch.picturePath,
-            updatedAt: watch.updatedAt,
-        }
-    })
-
-    res.render('watch/watchListView', {
-        title: 'Watch List',
-        data: results
+export const watchList = (req, res) => {
+    Watch.find({}, (err, watches) => {
+        if (err) return res.render('error', {
+            title: 'Error',
+            msg: err
+        })
+        const results = watches.map(watch => {
+            return {
+                id: watch._id,
+                brand: watch.brand,
+                model: watch.model,
+                year: watch.year,
+                color: watch.color,
+                description: watch.description,
+                price: watch.price,
+                picturePath: watch.picturePath,
+                updatedAt: watch.updatedAt,
+            }
+        })
+        res.render('watch/watchListView', {
+            title: 'Watch List',
+            data: results
+        })
     })
 }
 
