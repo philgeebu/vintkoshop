@@ -15,7 +15,16 @@ const upload = multer({storage: storage})
 // Initialize router
 const router = express.Router()
 
-// Watche routes
+const checkForAdmin = (req, res, next) => {
+    if (req.session.user)
+        if (req.session.user.admin) return next()
+    return res.render('error', {
+        title: 'Error',
+        msg: 'You must have admin permissions to access this page.'
+    })
+}
+
+// Watch routes
 import * as watches from './watches.js'
 router.get('/', function (req, res) {res.redirect('/watches')})
 router.get('/watches', watches.watchList)
@@ -42,6 +51,6 @@ router.get('/signout', signIn.signOut)
 
 // Message routes
 import * as messages from './messages.js'
-router.get('/messages', messages.messageList)
+router.get('/messages', checkForAdmin, messages.messageList)
 
 export default router
