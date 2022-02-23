@@ -18,7 +18,6 @@ export const signIn = (req, res) => {
             title: 'Sign In',
             msg: err || 'User/password incorrect.'
         })
-        req.session.authenticated = true
         req.session.user = {
             id: user._id,
             admin: user.admin
