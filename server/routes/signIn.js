@@ -20,6 +20,7 @@ export const signIn = (req, res) => {
         })
         req.session.user = {
             id: user._id,
+            email: user.email,
             admin: user.admin
         }
         res.redirect('/')

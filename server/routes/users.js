@@ -4,7 +4,8 @@ const User = userDB.getModel()
 // Add user view
 export const userAdd = (req, res) => {
     res.render('user/userAddView', {
-        title: "Add User"
+        title: "Add User",
+        user: req.session.user
     })
 }
 
@@ -15,7 +16,8 @@ export const userEdit = (req, res) => {
     User.findById(id, (err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         res.render('user/userEditView', {
             title: "Edit User",
@@ -25,7 +27,8 @@ export const userEdit = (req, res) => {
                 password: user.password,
                 admin: user.admin,
                 updatedAt: user.updatedAt
-            }
+            },
+            user: req.session.user
         })
     })
 }
@@ -35,7 +38,8 @@ export const userList = (req, res) => {
     User.find({}, (err, users) => {
         if (err || !users) return res.render('error', {
             title: 'Error',
-            msg: err || 'No users found.'
+            msg: err || 'No users found.',
+            user: req.session.user
         })
         const results = users.map(user => {
             return {
@@ -48,7 +52,8 @@ export const userList = (req, res) => {
         })
         res.render('user/userListView', {
             title: "User List",
-            data: results
+            data: results,
+            user: req.session.user
         })
     })
 }
@@ -63,7 +68,8 @@ export const userSave = (req, res) => {
     user.save((err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         res.redirect('/users/edit/' + user._id)
     })
@@ -76,7 +82,8 @@ export const userUpdate = (req, res) => {
     User.findById(id, (err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         user.email = req.body.email
         user.password = req.body.password
@@ -84,7 +91,8 @@ export const userUpdate = (req, res) => {
         user.save((err) => {
             if (err) return res.render('error', {
                 title: 'Error',
-                msg: err
+                msg: err,
+                user: req.session.user
             })
             res.redirect('back')
         })
@@ -98,12 +106,14 @@ export const userDelete = (req, res) => {
     User.findById(id, (err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         user.remove((err) => {
             if (err) return res.render('error', {
                 title: 'Error',
-                msg: err
+                msg: err,
+                user: req.session.user
             })
             res.redirect('/users')
         })

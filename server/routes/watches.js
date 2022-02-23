@@ -5,7 +5,36 @@ const Watch = watchDB.getModel()
 // Add watch view
 export const watchAdd = (req, res) => {
     res.render('watch/watchAddView', {
-        title: "Add Watch"
+        title: "Add Watch",
+        user: req.session.user
+    })
+}
+
+// Individual watch view
+export const watchIndividualView = (req, res) => {
+    const id = req.params.id
+
+    Watch.findById(id, (err, watch) => {
+        if (err) return res.render('error', {
+            title: 'Error',
+            msg: err,
+            user: req.session.user
+        })
+        res.render('watch/watchIndividualView', {
+            title: "View Watch",
+            data: {
+                id: watch._id,
+                brand: watch.brand,
+                model: watch.model,
+                year: watch.year,
+                color: watch.color,
+                description: watch.description,
+                price: watch.price,
+                picturePath: watch.picturePath,
+                updatedAt: watch.updatedAt,
+            },
+            user: req.session.user
+        })
     })
 }
 
@@ -16,7 +45,8 @@ export const watchEdit = (req, res) => {
     Watch.findById(id, (err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         res.render('watch/watchEditView', {
             title: "Edit Watch",
@@ -30,7 +60,8 @@ export const watchEdit = (req, res) => {
                 price: watch.price,
                 picturePath: watch.picturePath,
                 updatedAt: watch.updatedAt,
-            }
+            },
+            user: req.session.user
         })
     })
 }
@@ -40,7 +71,8 @@ export const watchList = (req, res) => {
     Watch.find({}, (err, watches) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         const results = watches.map(watch => {
             return {
@@ -57,7 +89,8 @@ export const watchList = (req, res) => {
         })
         res.render('watch/watchListView', {
             title: 'Watch List',
-            data: results
+            data: results,
+            user: req.session.user
         })
     })
 }
@@ -76,7 +109,8 @@ export const watchSave = (req, res) => {
     watch.save((err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         res.redirect('/watches/edit/' + watch._id)
     })
@@ -89,7 +123,8 @@ export const watchUpdate = (req, res) => {
     Watch.findById(id, (err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         let picToDelete = req.file || req.body.pictureRemove ? './public/watchuploads/' + watch.picturePath : ''
         watch.brand = req.body.brand
@@ -102,7 +137,8 @@ export const watchUpdate = (req, res) => {
         watch.save((err) => {
             if (err) return res.render('error', {
                 title: 'Error',
-                msg: err
+                msg: err,
+                user: req.session.user
             })
             fs.unlink(picToDelete, () => {
                 res.redirect('back')
@@ -118,13 +154,15 @@ export const watchDelete = (req, res) => {
     Watch.findById(id, (err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
-            msg: err
+            msg: err,
+            user: req.session.user
         })
         let picToDelete = './public/watchuploads/' + watch.picturePath
         watch.remove((err) => {
             if (err) return res.render('error', {
                 title: 'Error',
-                msg: err
+                msg: err,
+                user: req.session.user
             })
             fs.unlink(picToDelete, () => {
                 res.redirect('/')

@@ -1,4 +1,4 @@
-{{#if data}}
+{{#if user}}
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -7,8 +7,10 @@
             <th>Model</th>
             <th>Year</th>
             <th>Color</th>
-            <th>Price</th>
-            <th>Last Modified</th>
+            <th class="text-end">Price</th>
+            {{#if user.admin}}
+            <th class="text-end">Last Modified</th>
+            {{/if}}
             <th></th>
         </tr>
     </thead>
@@ -16,30 +18,56 @@
         {{#each data}}
         <tr>
             <td>
-                {{#if this.picturePath}}
-                <img src="/watchuploads/{{this.picturePath}}" class="watch-photo-list-preview"
-                    alt="picture of a {{this.color}} {{this.year}} {{this.brand}} {{this.model}} watch">
-                {{else}}
-                <img src="/watchuploads/genericwatch.png" name="currentPicture" class="watch-photo-list-preview"
-                    alt="generic placeholder picture of a watch">
-                {{/if}}
+                <a href="/watches/view/{{this.id}}">
+                    {{#if this.picturePath}}
+                    <img src="/watchuploads/{{this.picturePath}}" class="watch-photo-list-preview"
+                        alt="picture of a {{this.color}} {{this.year}} {{this.brand}} {{this.model}} watch">
+                    {{else}}
+                    <img src="/watchuploads/genericwatch.png" name="currentPicture" class="watch-photo-list-preview"
+                        alt="generic placeholder picture of a watch">
+                    {{/if}}
+                </a>
             </td>
             <td><strong>{{this.brand}}</strong></td>
             <td>{{this.model}}</td>
             <td>{{this.year}}</td>
             <td>
-                <strong
-                    style="color:{{this.color}}; text-shadow: 0 0 2px black;text-transform:uppercase;">{{this.color}}</strong>
+                <strong style="color:{{this.color}}; text-shadow: 0 0 2px black;text-transform:uppercase;">
+                    {{this.color}}
+                </strong>
             </td>
-            <td style="text-align: right;">${{this.price}}</td>
-            <td><i>{{this.updatedAt}}</i></td>
-            <td><a class="btn btn-dark" href="/watches/edit/{{this.id}}"><i class="fa-solid fa-square-pen"></i> Edit</a>
+            <td class="text-end">${{this.price}}</td>
+            {{#if ../user.admin}}
+            <td class="text-end"><i>{{this.updatedAt}}</i></td>
+            {{/if}}
+            <td class="text-end">
+                <a class="btn btn-dark" href="/watches/view/{{this.id}}"><i class="fa-solid fa-eye"></i> View</a>
+                {{#if ../user.admin}}
+                <a class="btn btn-dark" href="/watches/edit/{{this.id}}"><i class="fa-solid fa-pencil"></i> Edit</a>
+                {{/if}}
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-{{else}}
-<p>The watch inventory is currently empty!</p>
+{{#if user.admin}}
+<div class="text-center"><a class="btn btn-dark" href="/watches/add"><i class="fa-solid fa-plus"></i> Add</a></div>
 {{/if}}
-<a class="btn btn-dark" href="/watches/add"><i class="fa-solid fa-plus"></i> Add</a>
+{{else}}
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Watch</th>
+            <th class="text-end">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.year}} <strong>{{this.brand}}</strong> - {{this.model}}</td>
+            <td class="text-end">${{this.price}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{/if}}

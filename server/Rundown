@@ -1,0 +1,26 @@
+Node
+Express
+Express Handlebars w/Partials
+Express Router
+Express Session
+MongoDB
+Mongoose
+Multer
+FS
+
+Objective:
+As an admin
+    - I can CRUD watches for sale.
+    - I can CRUD users that can access content.
+    - I can RD messages that users submit.
+
+As a regular user
+    - I can R a list of watches for sale.
+    - I can R individual watches.
+    - I can C 1 message/watch.
+
+Not logged in
+    - I can R watches for sale.
+
+Noteables:
+Created authentication system with express-Session

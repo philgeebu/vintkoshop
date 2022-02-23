@@ -8,18 +8,30 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav ms-auto">
-				<a class="nav-item nav-link" href="/">Watches</a>
+				<a class="nav-item nav-link" href="/"><i class="fa-solid fa-clock"></i> Watches</a>
 				{{#if user}}
 				{{#if user.admin}}
-				<a class="nav-item nav-link" href="/messages">Messages</a>
-				<a class="nav-item nav-link" href="/users">Users</a>
+				<a class="nav-item nav-link" href="/messages"><i class="fa-solid fa-message"></i> Messages</a>
+				<a class="nav-item nav-link" href="/users"><i class="fa-solid fa-user-group"></i> Users</a>
 				{{/if}}
-				<a class="nav-item nav-link" href="/signout">Sign out</a>
+				<a class="nav-item nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a>
 				{{else}}
-				<a class="nav-item nav-link" href="/signin">Sign In</a>
+				<a class="nav-item nav-link" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
 				{{/if}}
 			</div>
 		</div>
 	</div>
 </nav>
-<h2 style="text-align: center;">{{title}}</h2>
+<div class="container text-end">
+	{{#if user}}
+	<small>Hey, {{user.email}}!</small>
+	{{else}}
+	<small>Anyone there?</small>
+	{{/if}}
+</div>
+<h2 class="text-center">{{title}}</h2>
+{{#if msg}}
+<div class="container">
+	<p class="message">{{msg}}</p>
+</div>
+{{/if}}

@@ -20,7 +20,8 @@ const checkForAdmin = (req, res, next) => {
         if (req.session.user.admin) return next()
     return res.render('error', {
         title: 'Error',
-        msg: 'You must have admin permissions to access this page.'
+        msg: 'You must have admin permissions to access this page.',
+        user: req.session.user
     })
 }
 
@@ -28,20 +29,21 @@ const checkForAdmin = (req, res, next) => {
 import * as watches from './watches.js'
 router.get('/', function (req, res) {res.redirect('/watches')})
 router.get('/watches', watches.watchList)
-router.get('/watches/add', watches.watchAdd)
-router.post('/watches/add', upload.single('picturePath'), watches.watchSave)
-router.get('/watches/edit/:id', watches.watchEdit)
-router.post('/watches/edit', upload.single('picturePath'), watches.watchUpdate)
-router.get('/watches/delete/:id', watches.watchDelete)
+router.get('/watches/add', checkForAdmin, watches.watchAdd)
+router.post('/watches/add', checkForAdmin, upload.single('picturePath'), watches.watchSave)
+router.get('/watches/view/:id', watches.watchIndividualView)
+router.get('/watches/edit/:id', checkForAdmin, watches.watchEdit)
+router.post('/watches/edit', checkForAdmin, upload.single('picturePath'), watches.watchUpdate)
+router.get('/watches/delete/:id', checkForAdmin, watches.watchDelete)
 
 // User routes
 import * as users from './users.js'
-router.get('/users', users.userList)
-router.get('/users/add', users.userAdd)
-router.post('/users/add', users.userSave)
-router.get('/users/edit/:id', users.userEdit)
-router.post('/users/edit', users.userUpdate)
-router.get('/users/delete/:id', users.userDelete)
+router.get('/users', checkForAdmin, users.userList)
+router.get('/users/add', checkForAdmin, users.userAdd)
+router.post('/users/add', checkForAdmin, users.userSave)
+router.get('/users/edit/:id', checkForAdmin, users.userEdit)
+router.post('/users/edit', checkForAdmin, users.userUpdate)
+router.get('/users/delete/:id', checkForAdmin, users.userDelete)
 
 //Sign in routes
 import * as signIn from './signIn.js'

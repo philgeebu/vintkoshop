@@ -1,1 +1,22 @@
-<p>{{title}}</p>
+<div class="card main-card">
+    {{#if data.picturePath}}
+    <img src="/watchuploads/{{data.picturePath}}" class="card-img-top watch-photo-main"
+        alt="picture of a {{data.color}} {{data.year}} {{data.brand}} {{data.model}} watch">
+    {{else}}
+    <img src="/watchuploads/genericwatch.png" name="currentPicture" class="card-img-top watch-photo-main"
+        alt="generic placeholder picture of a watch">
+    {{/if}}
+    <div class="card-body">
+        <h5 class="card-title text-end">{{data.year}} {{data.brand}} - {{data.model}}</h5>
+        <p class="card-text">
+            <strong>Color: </strong>
+            <strong style="color:{{data.color}}; text-shadow: 0 0 2px black;text-transform:uppercase;">
+                {{data.color}}
+            </strong>
+            <hr>
+            {{data.description}}<br>
+            <hr>
+            <strong>Price: </strong>${{data.price}}
+        </p>
+    </div>
+</div>
