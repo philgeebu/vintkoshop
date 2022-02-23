@@ -1,3 +1,4 @@
+{{#if user}}
 <div class="card main-card">
     {{#if data.picturePath}}
     <img src="/watchuploads/{{data.picturePath}}" class="card-img-top watch-photo-main"
@@ -24,8 +25,8 @@
 <div class="main-card p-4">
     <form method="post" action="/messages/ask">
         <div class="form-group">
-            <label for="comment">Interested in this watch? Send us a message.</label><br>
-            <textarea name="comment" class="form-control" rows="4"></textarea>
+            <label for="comment">Interested in this watch? Send us a message!</label><br>
+            <textarea name="comment" class="form-control" rows="4" required></textarea>
         </div>
         <br>
         <input type="hidden" name="userID" value="{{user.id}}">
@@ -38,3 +39,9 @@
     <br>
     <a class="btn btn-dark" href="javascript:history.back()">Go Back</a>
 </div>
+{{else}}
+<div class="text-center">
+    <br>
+	<a class="btn btn-dark" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+</div>
+{{/if}}
