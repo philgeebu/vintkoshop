@@ -22,7 +22,7 @@ export const messageList = (req, res) => {
             data: results,
             user: req.session.user
         })
-    })
+    }).populate('userID')
 }
 
 export const messageAsk = (req, res) => {
