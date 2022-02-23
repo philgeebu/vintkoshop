@@ -32,3 +32,4 @@ Noteables:
 - Created authentication system with express-session, with different levels of user
 - Photo upload and display, complete with storage upkeep (delete upon update, etc.)
 - Created custom middlewear to check for admin on every route
+- Foreign key relationships between messages and user/watch

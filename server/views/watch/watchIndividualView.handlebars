@@ -20,6 +20,20 @@
         </p>
     </div>
 </div>
+{{#unless user.admin}}
+<div class="main-card p-4">
+    <form method="post" action="/messages/ask">
+        <div class="form-group">
+            <label for="comment">Interested in this watch? Send us a message.</label><br>
+            <textarea name="comment" class="form-control" rows="4"></textarea>
+        </div>
+        <br>
+        <input type="hidden" name="userID" value="{{user.id}}">
+        <input type="hidden" name="watchID" value="{{data.id}}">
+        <input type="submit" value="Inquire" class="btn btn-dark">
+    </form>
+</div>
+{{/unless}}
 <div class="text-center">
     <br>
     <a class="btn btn-dark" href="javascript:history.back()">Go Back</a>
