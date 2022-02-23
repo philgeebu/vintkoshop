@@ -8,6 +8,12 @@ Mongoose
 Multer
 FS
 
+DB: Vintkoshop
+    Collections:
+        - users
+        - watches
+        - messages
+
 Objective:
 As an admin
     - I can CRUD watches for sale.
@@ -23,4 +29,6 @@ Not logged in
     - I can R watches for sale.
 
 Noteables:
-Created authentication system with express-Session
+- Created authentication system with express-session, with different levels of user
+- Photo upload and display, complete with storage upkeep (delete upon update, etc.)
+- Created custom middlewear to check for admin on every route

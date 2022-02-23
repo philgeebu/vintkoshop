@@ -8,7 +8,7 @@ body {
 }
 
 footer {
-    padding: 100px 0 20px;
+    padding: 7rem 0 2rem;
 }
 
 label {
@@ -18,7 +18,7 @@ label {
 
 .main-card {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 75ch;
 }
 
 .message {
@@ -27,12 +27,18 @@ label {
 }
 
 .navbar-brand-image {
-    max-height: 35px;
+    max-height: 2rem;
 }
 
 .updated-details {
+    margin-top:2rem;
     color: grey;
     font-style: italic;
+}
+
+.watch-list-card {
+    margin: 0 auto;
+    width: 50ch;
 }
 
 .watch-photo-main {

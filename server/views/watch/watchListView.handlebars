@@ -1,4 +1,4 @@
-{{#if user}}
+{{#if user.admin}}
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -8,9 +8,7 @@
             <th>Year</th>
             <th>Color</th>
             <th class="text-end">Price</th>
-            {{#if user.admin}}
             <th class="text-end">Last Modified</th>
-            {{/if}}
             <th></th>
         </tr>
     </thead>
@@ -37,37 +35,54 @@
                 </strong>
             </td>
             <td class="text-end">${{this.price}}</td>
-            {{#if ../user.admin}}
             <td class="text-end"><i>{{this.updatedAt}}</i></td>
-            {{/if}}
             <td class="text-end">
                 <a class="btn btn-dark" href="/watches/view/{{this.id}}"><i class="fa-solid fa-eye"></i> View</a>
-                {{#if ../user.admin}}
                 <a class="btn btn-dark" href="/watches/edit/{{this.id}}"><i class="fa-solid fa-pencil"></i> Edit</a>
-                {{/if}}
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-{{#if user.admin}}
 <div class="text-center"><a class="btn btn-dark" href="/watches/add"><i class="fa-solid fa-plus"></i> Add</a></div>
-{{/if}}
 {{else}}
-<table class="table table-condensed">
-    <thead>
-        <tr>
-            <th>Watch</th>
-            <th class="text-end">Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each data}}
-        <tr>
-            <td>{{this.year}} <strong>{{this.brand}}</strong> - {{this.model}}</td>
-            <td class="text-end">${{this.price}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+{{#if user}}
+<div class="watch-list-card">
+    {{#each data}}
+    <figure class="figure">
+        {{#if this.picturePath}}
+        <img src="/watchuploads/{{this.picturePath}}" class="watch-photo-list-preview figure-img img-fluid rounded"
+            alt="picture of a {{this.color}} {{this.year}} {{this.brand}} {{this.model}} watch">
+        {{else}}
+        <img src="/watchuploads/genericwatch.png" name="currentPicture"
+            class="watch-photo-list-preview figure-img img-fluid rounded" alt="generic placeholder picture of a watch">
+        {{/if}}
+        <figcaption class="figure-caption">
+            <p>{{this.year}} | {{this.brand}} - {{this.model}}</p>
+            <a class="btn btn-dark" href="/watches/view/{{this.id}}"><i class="fa-solid fa-eye"></i> View</a>
+        </figcaption>
+    </figure>
+    <hr>
+    {{/each}}
+</div>
+{{else}}
+<div class="main-card">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Watch</th>
+                <th class="text-end">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.year}} <strong>{{this.brand}}</strong> - {{this.model}}</td>
+                <td class="text-end">${{this.price}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{/if}}
 {{/if}}
