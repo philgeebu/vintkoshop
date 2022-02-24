@@ -2,21 +2,28 @@
 <table class="table table-condensed">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>UserID</th>
-            <th>WatchID</th>
+            <th>Email</th>
+            <th>Watch</th>
             <th>Comment</th>
-            <th class="text-end">Last modified</th>
+            <th class="text-end">Received</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {{#each data}}
         <tr>
-            <td><strong>{{this.id}}</strong></td>
-            <td>{{this.userID}}</td>
-            <td>{{this.watchID}}</td>
+            <td>
+                <a href="mailto:{{this.userID.email}}">
+                    <i class="fa-solid fa-envelope"></i>
+                    <strong>{{this.userID.email}}</strong>
+                </a>
+            </td>
+            <td>{{this.watchID.year}} | {{this.watchID.brand}} - {{this.watchID.model}}</td>
             <td>{{this.comment}}</td>
             <td class="text-end"><i>{{this.updatedAt}}</i></td>
+            <td>
+                <a href="/messages/delete/{{this.id}}" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         {{/each}}
     </tbody>

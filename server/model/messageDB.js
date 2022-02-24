@@ -18,6 +18,9 @@ let messageSchema = new Schema({
     timestamps: true,
 })
 
+// Only allows a user to submit 1 message per watch
+messageSchema.index({ userID: 1, watchID: 1}, { unique: true })
+
 export default {
     getModel: () => {
         let connection = mongoose.createConnection(dbUrl, {

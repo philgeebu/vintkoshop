@@ -15,7 +15,9 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 // Body-Parser
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({
+    extended: true
+}))
 app.use(express.json())
 
 // Initialize Express Session
@@ -28,7 +30,10 @@ app.use(session({
 // Routing
 app.use('/', routes)
 app.use(function (req, res) {
-    res.status(404).render('404')
+    res.status(404).render('404', {
+        title: 'Error',
+        user: req.session.user
+    })
 })
 
 app.listen(3000, function () {

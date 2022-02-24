@@ -55,5 +55,6 @@ router.get('/signout', signIn.signOut)
 import * as messages from './messages.js'
 router.get('/messages', checkForAdmin, messages.messageList)
 router.post('/messages/ask', messages.messageAsk)
+router.get('/messages/delete/:id', checkForAdmin, messages.messageDelete)
 
 export default router
