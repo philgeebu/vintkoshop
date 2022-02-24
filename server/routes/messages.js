@@ -37,7 +37,7 @@ export const messageList = (req, res) => {
     }).lean()
 }
 
-// Submit a message
+// Submit message
 export const messageAsk = (req, res) => {
     const message = new Message({
         comment: req.body.comment,

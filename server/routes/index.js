@@ -15,6 +15,7 @@ const upload = multer({storage: storage})
 // Initialize router
 const router = express.Router()
 
+// Custom middleware to check for admin-only routes
 const checkForAdmin = (req, res, next) => {
     if (req.session.user)
         if (req.session.user.admin) return next()
@@ -29,9 +30,9 @@ const checkForAdmin = (req, res, next) => {
 import * as watches from './watches.js'
 router.get('/', function (req, res) {res.redirect('/watches')})
 router.get('/watches', watches.watchList)
+router.get('/watches/:id', watches.watchIndividualView)
 router.get('/watches/add', checkForAdmin, watches.watchAdd)
 router.post('/watches/add', checkForAdmin, upload.single('picturePath'), watches.watchSave)
-router.get('/watches/view/:id', watches.watchIndividualView)
 router.get('/watches/edit/:id', checkForAdmin, watches.watchEdit)
 router.post('/watches/edit', checkForAdmin, upload.single('picturePath'), watches.watchUpdate)
 router.get('/watches/delete/:id', checkForAdmin, watches.watchDelete)
