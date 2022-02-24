@@ -5,12 +5,12 @@ const User = userDB.getModel()
 const userDefaultInitialize = async (req, res) => {
     await User.deleteMany({})
     const userAdmin = new User({
-        email: 'admin@vintko.com',
+        email: 'vintko_admin@vintko.com',
         password: '123123',
         admin: true
     })
     const userRegular = new User({
-        email: 'user@vintko.com',
+        email: 'vintko_user@vintko.com',
         password: '123123',
         admin: false
     })
