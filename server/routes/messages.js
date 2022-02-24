@@ -8,6 +8,7 @@ const Watch = watchDB.getModel()
 
 // List messages
 export const messageList = (req, res) => {
+    // Find all messages and render html
     Message.find({}, (err, messages) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -23,7 +24,7 @@ export const messageList = (req, res) => {
                 updatedAt: message.updatedAt
             }
         })
-        res.render('message/messageListView', {
+        return res.render('message/messageListView', {
             title: "Message List",
             data: results,
             user: req.session.user
@@ -38,12 +39,13 @@ export const messageList = (req, res) => {
 }
 
 // Submit message
-export const messageAsk = (req, res) => {
+export const messageAdd = (req, res) => {
     const message = new Message({
         comment: req.body.comment,
         userID: req.body.userID,
         watchID: req.body.watchID
     })
+    // save message and render confirm
     message.save((err, message) => {
         if (err.code === 11000) return res.render('error', {
             title: 'Error',
@@ -65,7 +67,7 @@ export const messageAsk = (req, res) => {
 // Delete message
 export const messageDelete = (req, res) => {
     const id = req.params.id
-
+    // Find message and remove it, then re-render current page
     Message.findById(id, (err, message) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -78,7 +80,7 @@ export const messageDelete = (req, res) => {
                 msg: err,
                 user: req.session.user
             })
-            res.redirect('back')
+            return res.redirect('back')
         })
     })
 }

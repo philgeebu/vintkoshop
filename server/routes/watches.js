@@ -4,7 +4,7 @@ const Watch = watchDB.getModel()
 
 // Add watch view
 export const watchAdd = (req, res) => {
-    res.render('watch/watchAddView', {
+    return res.render('watch/watchAddView', {
         title: "Add Watch",
         user: req.session.user
     })
@@ -14,22 +14,24 @@ export const watchAdd = (req, res) => {
 export const watchIndividualView = (req, res) => {
     const id = req.params.id
     // check the format of the request, and respond with appropriate formats
-    res.format({
+    return res.format({
         // JSON
         'application/json': () => {
+            // Find and return individual watch
             Watch.findById(id, (err, watch) => {
-                res.end(JSON.stringify(watch))
+                return res.end(JSON.stringify(watch))
             })
         },
         // HTML
         'text/html': () => {
+            // Find and return individual watch
             Watch.findById(id, (err, watch) => {
                 if (err) return res.render('error', {
                     title: 'Error',
                     msg: err,
                     user: req.session.user
                 })
-                res.render('watch/watchIndividualView', {
+                return res.render('watch/watchIndividualView', {
                     title: "View Watch",
                     data: {
                         id: watch._id,
@@ -48,8 +50,8 @@ export const watchIndividualView = (req, res) => {
         },
         // provide a 404 error
         'default': () => {
-            res.status(404);
-            res.send("<b>404 - Not Found</b>");
+            res.status(404)
+            return res.send("<b>404 - Not Found</b>")
         }
     })
 
@@ -58,14 +60,14 @@ export const watchIndividualView = (req, res) => {
 // Edit watch view
 export const watchEdit = (req, res) => {
     const id = req.params.id
-
+    // find watch and send information to edit form
     Watch.findById(id, (err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
             msg: err,
             user: req.session.user
         })
-        res.render('watch/watchEditView', {
+        return res.render('watch/watchEditView', {
             title: "Edit Watch",
             data: {
                 id: watch._id,
@@ -86,15 +88,17 @@ export const watchEdit = (req, res) => {
 // List watches view
 export const watchList = (req, res) => {
     // check the format of the request, and respond with appropriate formats
-    res.format({
+    return res.format({
         // JSON
         'application/json': () => {
+            // Find and return all watches
             Watch.find({}, (err, watches) => {
-                res.end(JSON.stringify(watches))
+                return res.end(JSON.stringify(watches))
             })
         },
         // HTML
         'text/html': () => {
+            // Find and return all watches
             Watch.find({}, (err, watches) => {
                 if (err) return res.render('error', {
                     title: 'Error',
@@ -114,7 +118,7 @@ export const watchList = (req, res) => {
                         updatedAt: watch.updatedAt,
                     }
                 })
-                res.render('watch/watchListView', {
+                return res.render('watch/watchListView', {
                     title: 'Watch List',
                     data: results,
                     user: req.session.user
@@ -124,7 +128,7 @@ export const watchList = (req, res) => {
         // provide a 404 error
         'default': () => {
             res.status(404);
-            res.send("<b>404 - Not Found</b>");
+            return res.send("<b>404 - Not Found</b>");
         }
     })
 }
@@ -140,20 +144,21 @@ export const watchSave = (req, res) => {
         price: req.body.price,
         picturePath: req.file ? req.file.filename : '',
     })
+    // Save watch and redirect to edit page
     watch.save((err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
             msg: err,
             user: req.session.user
         })
-        res.redirect('/watches/edit/' + watch._id)
+        return res.redirect('/watches/edit/' + watch._id)
     })
 }
 
 // Update watch
 export const watchUpdate = (req, res) => {
     const id = req.body.id
-
+    // Find watch, update values, save, and reload page
     Watch.findById(id, (err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -175,7 +180,7 @@ export const watchUpdate = (req, res) => {
                 user: req.session.user
             })
             fs.unlink(picToDelete, () => {
-                res.redirect('back')
+                return res.redirect('back')
             })
         })
     })
@@ -184,7 +189,7 @@ export const watchUpdate = (req, res) => {
 // Delete watch
 export const watchDelete = (req, res) => {
     const id = req.params.id
-
+    // Find watch and remove them, then redirect back to watch list
     Watch.findById(id, (err, watch) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -199,7 +204,7 @@ export const watchDelete = (req, res) => {
                 user: req.session.user
             })
             fs.unlink(picToDelete, () => {
-                res.redirect('/')
+                return redirect('/')
             })
         })
     })

@@ -30,7 +30,7 @@ app.use(session({
 // Routing
 app.use('/', routes)
 app.use(function (req, res) {
-    res.status(404).render('404', {
+    return res.status(404).render('404', {
         title: 'Error',
         user: req.session.user
     })

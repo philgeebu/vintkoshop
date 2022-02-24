@@ -3,7 +3,7 @@ const User = userDB.getModel()
 
 // Add user view
 export const userAdd = (req, res) => {
-    res.render('user/userAddView', {
+    return res.render('user/userAddView', {
         title: "Add User",
         user: req.session.user
     })
@@ -12,14 +12,14 @@ export const userAdd = (req, res) => {
 // Edit user view
 export const userEdit = (req, res) => {
     const id = req.params.id
-
+    // Find user and send information to edit form
     User.findById(id, (err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
             msg: err,
             user: req.session.user
         })
-        res.render('user/userEditView', {
+        return res.render('user/userEditView', {
             title: "Edit User",
             data: {
                 id: user._id,
@@ -35,6 +35,7 @@ export const userEdit = (req, res) => {
 
 // List users view
 export const userList = (req, res) => {
+    // Find all users and render html
     User.find({}, (err, users) => {
         if (err || !users) return res.render('error', {
             title: 'Error',
@@ -50,7 +51,7 @@ export const userList = (req, res) => {
                 updatedAt: user.updatedAt
             }
         })
-        res.render('user/userListView', {
+        return res.render('user/userListView', {
             title: "User List",
             data: results,
             user: req.session.user
@@ -65,20 +66,21 @@ export const userSave = (req, res) => {
         password: req.body.password,
         admin: Boolean(req.body.admin)
     })
+    // save user and redirect to edit page
     user.save((err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
             msg: err,
             user: req.session.user
         })
-        res.redirect('/users/edit/' + user._id)
+        return res.redirect('/users/edit/' + user._id)
     })
 }
 
 // Update user
 export const userUpdate = (req, res) => {
     const id = req.body.id
-
+    // Find user, update values, save, and reload page
     User.findById(id, (err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -94,7 +96,7 @@ export const userUpdate = (req, res) => {
                 msg: err,
                 user: req.session.user
             })
-            res.redirect('back')
+            return res.redirect('back')
         })
     })
 }
@@ -102,7 +104,7 @@ export const userUpdate = (req, res) => {
 // Delete user
 export const userDelete = (req, res) => {
     const id = req.params.id
-
+    // Find user and remove them, then redirect back to user list
     User.findById(id, (err, user) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -115,7 +117,7 @@ export const userDelete = (req, res) => {
                 msg: err,
                 user: req.session.user
             })
-            res.redirect('/users')
+            return res.redirect('/users')
         })
     })
 }

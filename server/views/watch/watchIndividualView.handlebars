@@ -31,7 +31,9 @@
         <br>
         <input type="hidden" name="userID" value="{{user.id}}">
         <input type="hidden" name="watchID" value="{{data.id}}">
-        <input type="submit" value="Inquire" class="btn btn-dark">
+        <div class="text-end">
+            <input type="submit" value="Inquire" class="btn btn-dark">
+        </div>
     </form>
 </div>
 {{/unless}}
@@ -42,6 +44,6 @@
 {{else}}
 <div class="text-center">
     <br>
-	<a class="btn btn-dark" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
+    <a class="btn btn-dark" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a>
 </div>
 {{/if}}

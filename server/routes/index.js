@@ -28,7 +28,7 @@ const checkForAdmin = (req, res, next) => {
 
 // Watch routes
 import * as watches from './watches.js'
-router.get('/', function (req, res) {res.redirect('/watches')})
+router.get('/', function (req, res) {return res.redirect('/watches')})
 router.get('/watches', watches.watchList)
 router.get('/watches/:id', watches.watchIndividualView)
 router.get('/watches/add', checkForAdmin, watches.watchAdd)
@@ -55,7 +55,7 @@ router.get('/signout', signIn.signOut)
 // Message routes
 import * as messages from './messages.js'
 router.get('/messages', checkForAdmin, messages.messageList)
-router.post('/messages/ask', messages.messageAsk)
+router.post('/messages/ask', messages.messageAdd)
 router.get('/messages/delete/:id', checkForAdmin, messages.messageDelete)
 
 export default router

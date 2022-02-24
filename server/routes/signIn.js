@@ -3,13 +3,14 @@ const User = userDB.getModel()
 
 // Sign In form view
 export const signInForm = (req, res) => {
-    res.render('signInFormView', {
+    return res.render('signInFormView', {
         title: "Sign In"
     })
 }
 
 // Sign In
 export const signIn = (req, res) => {
+    // Find user with provided credentials, then apply credentials to session if user
     User.findOne({
         email: req.body.email,
         password: req.body.password
@@ -23,13 +24,13 @@ export const signIn = (req, res) => {
             email: user.email,
             admin: user.admin
         }
-        res.redirect('/')
+        return res.redirect('/')
     })
 }
 
 // Sign Out
 export const signOut = (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/')
+        return res.redirect('/')
     })
 }
