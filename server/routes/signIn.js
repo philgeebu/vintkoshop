@@ -10,7 +10,7 @@ export const signInForm = (req, res) => {
 
 // Sign In
 export const signIn = (req, res) => {
-    // Find user with provided credentials, then apply credentials to session if user
+    // Find user with provided credentials and apply credentials to session then redirect home
     User.findOne({
         email: req.body.email,
         password: req.body.password

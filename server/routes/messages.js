@@ -8,7 +8,7 @@ const Watch = watchDB.getModel()
 
 // List messages
 export const messageList = (req, res) => {
-    // Find all messages and render html
+    // Find all messages then render html
     Message.find({}, (err, messages) => {
         if (err) return res.render('error', {
             title: 'Error',
@@ -45,7 +45,7 @@ export const messageAdd = (req, res) => {
         userID: req.body.userID,
         watchID: req.body.watchID
     })
-    // save message and render confirm
+    // Save message then render confirm
     message.save((err, message) => {
         if (err.code === 11000) return res.render('error', {
             title: 'Error',
@@ -67,7 +67,7 @@ export const messageAdd = (req, res) => {
 // Delete message
 export const messageDelete = (req, res) => {
     const id = req.params.id
-    // Find message and remove it, then re-render current page
+    // Find message and remove it then re-render current page
     Message.findById(id, (err, message) => {
         if (err) return res.render('error', {
             title: 'Error',
