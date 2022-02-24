@@ -45,7 +45,12 @@ export const messageAsk = (req, res) => {
         watchID: req.body.watchID
     })
     message.save((err, message) => {
-        if (err) return res.render('error', {
+        if (err.code === 11000) return res.render('error', {
+            title: 'Error',
+            msg: "You have already submitted a message for this watch.",
+            user: req.session.user
+        })
+        else if (err) return res.render('error', {
             title: 'Error',
             msg: err,
             user: req.session.user
