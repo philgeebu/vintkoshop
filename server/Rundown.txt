@@ -1,10 +1,7 @@
 Node
 Express
-Express Handlebars w/Partials
-Express Router
-Express Session
-MongoDB
-Mongoose
+Express Router, Session, Handlebars w/partials
+MongoDB w/Mongoose
 Multer
 FS
 
@@ -33,3 +30,9 @@ Noteables:
 - Photo upload and display, complete with storage upkeep (delete upon update, etc.)
 - Created custom middlewear to check for admin on every route
 - Foreign key relationships between messages and user/watch
+
+Future plans:
+Better validation
+legit authentication/registration
+image upload compression/limitations
+image library per watch
