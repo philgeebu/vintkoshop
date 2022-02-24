@@ -13,29 +13,46 @@ export const watchAdd = (req, res) => {
 // Individual watch view
 export const watchIndividualView = (req, res) => {
     const id = req.params.id
-
-    Watch.findById(id, (err, watch) => {
-        if (err) return res.render('error', {
-            title: 'Error',
-            msg: err,
-            user: req.session.user
-        })
-        res.render('watch/watchIndividualView', {
-            title: "View Watch",
-            data: {
-                id: watch._id,
-                brand: watch.brand,
-                model: watch.model,
-                year: watch.year,
-                color: watch.color,
-                description: watch.description,
-                price: watch.price,
-                picturePath: watch.picturePath,
-                updatedAt: watch.updatedAt,
-            },
-            user: req.session.user
-        })
+    // check the format of the request, and respond with appropriate formats
+    res.format({
+        // JSON
+        'application/json': () => {
+            Watch.findById(id, (err, watch) => {
+                res.end(JSON.stringify(watch))
+            })
+        },
+        // HTML
+        'text/html': () => {
+            Watch.findById(id, (err, watch) => {
+                if (err) return res.render('error', {
+                    title: 'Error',
+                    msg: err,
+                    user: req.session.user
+                })
+                res.render('watch/watchIndividualView', {
+                    title: "View Watch",
+                    data: {
+                        id: watch._id,
+                        brand: watch.brand,
+                        model: watch.model,
+                        year: watch.year,
+                        color: watch.color,
+                        description: watch.description,
+                        price: watch.price,
+                        picturePath: watch.picturePath,
+                        updatedAt: watch.updatedAt,
+                    },
+                    user: req.session.user
+                })
+            })
+        },
+        // provide a 404 error
+        'default': () => {
+            res.status(404);
+            res.send("<b>404 - Not Found</b>");
+        }
     })
+
 }
 
 // Edit watch view
@@ -68,30 +85,47 @@ export const watchEdit = (req, res) => {
 
 // List watches view
 export const watchList = (req, res) => {
-    Watch.find({}, (err, watches) => {
-        if (err) return res.render('error', {
-            title: 'Error',
-            msg: err,
-            user: req.session.user
-        })
-        const results = watches.map(watch => {
-            return {
-                id: watch._id,
-                brand: watch.brand,
-                model: watch.model,
-                year: watch.year,
-                color: watch.color,
-                description: watch.description,
-                price: watch.price,
-                picturePath: watch.picturePath,
-                updatedAt: watch.updatedAt,
-            }
-        })
-        res.render('watch/watchListView', {
-            title: 'Watch List',
-            data: results,
-            user: req.session.user
-        })
+    // check the format of the request, and respond with appropriate formats
+    res.format({
+        // JSON
+        'application/json': () => {
+            Watch.find({}, (err, watches) => {
+                res.end(JSON.stringify(watches))
+            })
+        },
+        // HTML
+        'text/html': () => {
+            Watch.find({}, (err, watches) => {
+                if (err) return res.render('error', {
+                    title: 'Error',
+                    msg: err,
+                    user: req.session.user
+                })
+                const results = watches.map(watch => {
+                    return {
+                        id: watch._id,
+                        brand: watch.brand,
+                        model: watch.model,
+                        year: watch.year,
+                        color: watch.color,
+                        description: watch.description,
+                        price: watch.price,
+                        picturePath: watch.picturePath,
+                        updatedAt: watch.updatedAt,
+                    }
+                })
+                res.render('watch/watchListView', {
+                    title: 'Watch List',
+                    data: results,
+                    user: req.session.user
+                })
+            })
+        },
+        // provide a 404 error
+        'default': () => {
+            res.status(404);
+            res.send("<b>404 - Not Found</b>");
+        }
     })
 }
 
