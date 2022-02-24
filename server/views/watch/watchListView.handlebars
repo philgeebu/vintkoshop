@@ -66,6 +66,7 @@
     {{/each}}
 </div>
 {{else}}
+{{#if data}}
 <div class="main-card">
     <table class="table table-condensed">
         <thead>
@@ -84,6 +85,7 @@
         </tbody>
     </table>
 </div>
+{{/if}}
 {{/if}}
 {{/if}}
 {{#unless data}}
