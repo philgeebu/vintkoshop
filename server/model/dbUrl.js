@@ -1,6 +1,6 @@
 const credentials = {
 	host: 'localhost:27017',
-	username: 'vintko_backend',
+	username: 'vintko',
 	password: 'vintko_secret',
 	database: 'vintkoshop'
 }
