@@ -1,6 +1,6 @@
 ![alt text](https://www.vintko.com/img/vintko_logo.9b6e233f.png)
 
-This application and its scripts assume you have nodemon globally installed, and have MongoDB running on port localhost:27017
+This application and its scripts assume you have nodemon globally installed, and have MongoDB running on localhost:27017
 
 - CD to the 'server' directory
 - Run 'npm install' to populate node_modules
