@@ -1,5 +1,7 @@
 ![alt text](https://www.vintko.com/img/vintko_logo.9b6e233f.png)
 
+Vintko is a vintage watch shop application that allows an admin to control inventory while providing regular users visibility to said inventory.
+
 This application and its scripts assume you have nodemon globally installed, and have MongoDB running on localhost:27017
 
 - CD to the 'server' directory
