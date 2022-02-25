@@ -47,16 +47,18 @@ export const messageAdd = (req, res) => {
     })
     // Save message then render confirm
     message.save((err, message) => {
-        if (err.code === 11000) return res.render('error', {
-            title: 'Error',
-            msg: "You have already submitted a message for this watch.",
-            user: req.session.user
-        })
-        else if (err) return res.render('error', {
-            title: 'Error',
-            msg: err,
-            user: req.session.user
-        })
+        if (err) {
+            if (err.code === 11000) return res.render('error', {
+                title: 'Error',
+                msg: "You have already submitted a message for this watch.",
+                user: req.session.user
+            })
+            return res.render('error', {
+                title: 'Error',
+                msg: err,
+                user: req.session.user
+            })
+        }
         return res.render('messageConfirm', {
             title: 'Message Received!',
             user: req.session.user
