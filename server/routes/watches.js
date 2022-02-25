@@ -204,7 +204,7 @@ export const watchDelete = (req, res) => {
                 user: req.session.user
             })
             fs.unlink(picToDelete, () => {
-                return redirect('/')
+                return res.redirect('/')
             })
         })
     })
