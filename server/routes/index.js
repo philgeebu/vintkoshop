@@ -30,12 +30,12 @@ const checkForAdmin = (req, res, next) => {
 import * as watches from './watches.js'
 router.get('/', function (req, res) {return res.redirect('/watches')})
 router.get('/watches', watches.watchList)
-router.get('/watches/:id', watches.watchIndividualView)
 router.get('/watches/add', checkForAdmin, watches.watchAdd)
 router.post('/watches/add', checkForAdmin, upload.single('picturePath'), watches.watchSave)
 router.get('/watches/edit/:id', checkForAdmin, watches.watchEdit)
 router.post('/watches/edit', checkForAdmin, upload.single('picturePath'), watches.watchUpdate)
 router.get('/watches/delete/:id', checkForAdmin, watches.watchDelete)
+router.get('/watches/:id', watches.watchIndividualView)
 
 // User routes
 import * as users from './users.js'
