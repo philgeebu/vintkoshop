@@ -4,7 +4,8 @@ const Watch = watchDB.getModel()
 
 // Add watch view
 export const watchAdd = (req, res) => {
-    return res.render('watch/watchAddView', {
+    console.log("hellllo")
+    res.render('watch/watchAddView', {
         title: "Add Watch",
         user: req.session.user
     })

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 import dbUrl from './dbUrl.js'
 
-let Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
-let watchSchema = new Schema({
+const watchSchema = new Schema({
 	brand: String,
 	model: String,
 	year: Number,
@@ -18,7 +18,7 @@ let watchSchema = new Schema({
 
 export default {
 	getModel: () => {
-		let connection = mongoose.createConnection(dbUrl, {
+		const connection = mongoose.createConnection(dbUrl, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})

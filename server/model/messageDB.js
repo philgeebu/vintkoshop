@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 import dbUrl from './dbUrl.js'
 
-let Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
-let messageSchema = new Schema({
+const messageSchema = new Schema({
     comment: String,
     userID: {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,11 +19,16 @@ let messageSchema = new Schema({
 })
 
 // Only allows a user to submit 1 message per watch
-messageSchema.index({ userID: 1, watchID: 1}, { unique: true })
+messageSchema.index({
+    userID: 1,
+    watchID: 1
+}, {
+    unique: true
+})
 
 export default {
     getModel: () => {
-        let connection = mongoose.createConnection(dbUrl, {
+        const connection = mongoose.createConnection(dbUrl, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
