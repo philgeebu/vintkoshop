@@ -1,0 +1,26 @@
+#with MongoDB installed and running on http://localhost:27017
+
+## Using Mongo shell (or MongoDB Compass)
+# Create and switch to vintkoshop DB
+use vintkoshop
+
+# Create readWrite user for DB connections
+db.createUser(
+{
+user: "vintko",
+pwd: "vintko_secret",
+roles: ["readWrite"]
+}
+)
+
+## within server directory:
+# to install dependencies
+npm install
+
+# to initialize app's userbase with default users
+npm run initialize
+
+# to start application
+npm run start
+
+http://localhost:3000
