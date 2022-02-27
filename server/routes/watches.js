@@ -19,7 +19,9 @@ export const watchIndividualView = (req, res) => {
         'application/json': () => {
             // Find individual watch
             Watch.findById(id, (err, watch) => {
-                return res.end(JSON.stringify(watch))
+                if (err) res.send("Failed")
+                res.setHeader('Content-Type', 'application/json')
+                return res.send(JSON.stringify(watch))
             })
         },
         // HTML
@@ -93,7 +95,9 @@ export const watchList = (req, res) => {
         'application/json': () => {
             // Find all watches
             Watch.find({}, (err, watches) => {
-                return res.end(JSON.stringify(watches))
+                if (err) res.send("Failed")
+                res.setHeader('Content-Type', 'application/json')
+                return res.send(JSON.stringify(watches))
             })
         },
         // HTML
