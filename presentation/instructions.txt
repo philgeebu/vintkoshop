@@ -14,13 +14,13 @@ roles: ["readWrite"]
 )
 
 ## within server directory:
-# to install dependencies
+# Install dependencies
 npm install
 
-# to initialize app's userbase with default users
+# Initialize app's userbase with default users
 npm run initialize
 
-# to start application
+# Start application
 npm run start
 
 http://localhost:3000
